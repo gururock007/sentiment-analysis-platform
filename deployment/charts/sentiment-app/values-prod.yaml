@@ -1,0 +1,16 @@
+global:
+  environment: prod
+
+gateway:
+  replicaCount: 3 # Scale up for prod traffic!
+  image:
+    tag: v1   # Pull a stable production image tag
+
+job:
+  replicaCount: 2 # Scale up background job processing
+
+postgres:
+  password: "an-actual-secure-prod-password" # Override dev defaults
+
+ingress:
+  host: "api.sentiment.local" # Use your production domain name!

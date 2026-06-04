@@ -1,0 +1,20 @@
+docker build -t sentiment-job:v1 . 
+ 
+docker run --rm --network host --name redis redis:latest
+
+docker run --rm --name postgres --network host -e POSTGRES_USER=app -e POSTGRES_PASSWORD=app -e POSTGRES_DB=sentiment postgres:16-alpine
+
+docker run --rm --network host --name sentiment-gateway sentiment-gateway:v1
+
+docker run --rm --network host --name sentiment-job sentiment-job:v1
+
+docker run --rm --network host --name sentiment-worker sentiment-worker:v1
+
+
+kind load docker-image sentiment-gateway:v1 --name dev-cluster &&  kind load docker-image sentiment-job:v1 --name dev-cluster &&  kind load docker-image sentiment-worker:v1 --name dev-cluster && kind load docker-image redis:latest --name dev-cluster && kind load docker-image postgres:16-alpine --name dev-cluster
+
+kubectl delete -R -f deployment/base/
+
+kubectl port-forward svc/alb-mock-service 8080:80 -n sentiment-prod
+
+kubectl port-forward service/ingress-nginx-controller 8080:80 -n ingress-nginx

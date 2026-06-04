@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sentiment-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    # This rewrite annotation behaves like your old proxy_pass trailing slash trick
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+spec:
+  rules:
+    - http:
+        paths:
+          # 1. Route /job-service/ paths to the job service
+          - path: /job(/|$)(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: job
+                port:
+                  number: 8001
+          
+          # 2. Route everything else ( root / ) to the gateway service
+          - path: /()(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: gateway
+                port:
+                  number: 8000

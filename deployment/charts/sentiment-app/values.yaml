@@ -1,0 +1,33 @@
+global:
+  environment: dev
+
+gateway:
+  replicaCount: 2
+  image: { repository: sentiment-gateway, tag: v1, pullPolicy: Never }
+  service: { port: 8000 }
+
+job:
+  replicaCount: 1
+  image: { repository: sentiment-job, tag: v1, pullPolicy: Never }
+  service: { port: 8001 }
+
+worker:
+  replicaCount: 1
+  image: { repository: sentiment-worker, tag: v1, pullPolicy: Never }
+
+# Datastores
+postgres:
+  image: { repository: postgres, tag: 15-alpine, pullPolicy: IfNotPresent }
+  service: { port: 5432 }
+  dbName: sentiment
+  user: app
+  password: supersecretpassword # In real life, use Helm secrets, but this works great for learning!
+
+redis:
+  image: { repository: redis, tag: 7-alpine, pullPolicy: IfNotPresent }
+  service: { port: 6379 }
+
+ingress:
+  enabled: true
+  className: "nginx"
+  host: "localhost"

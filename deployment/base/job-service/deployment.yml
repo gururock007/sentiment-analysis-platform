@@ -1,0 +1,27 @@
+# base/gateway/deployment.yml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: job
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: job
+  template:
+    metadata:
+      labels:
+        app: job
+    spec:
+      enableServiceLinks: false
+      containers:
+        - name: sentiment-job
+          image: sentiment-job:v1
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8001      
+          envFrom:
+            - configMapRef:
+                name: job-config
+            - secretRef:
+                name: job-secret

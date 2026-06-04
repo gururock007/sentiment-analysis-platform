@@ -1,0 +1,14 @@
+paths:
+  raw_data: "datasets/raw/training.1600000.processed.noemoticon.csv"
+  processed_train_data: "datasets/processed/train.csv"
+  processed_test_data: "datasets/processed/test.csv"
+  model_path: "models/sentiment_model.pkl"
+  vectorizer_path: "models/tfidf_vectorizer.pkl"
+
+data_params:
+  test_size: 0.2
+  random_state: 42
+
+model_params:
+  max_iter: 1000
+  C: 1.0

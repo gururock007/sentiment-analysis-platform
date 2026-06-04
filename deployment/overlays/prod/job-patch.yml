@@ -1,0 +1,13 @@
+# deployment/overlays/prod/job-patch.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: job
+spec:
+  type: NodePort
+  selector:
+    app: job
+  ports:
+    - port: 8001
+      targetPort: 8001
+      nodePort: 30007

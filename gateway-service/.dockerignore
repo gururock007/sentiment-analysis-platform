@@ -1,0 +1,15 @@
+# Ignore ALL venvs anywhere in the build context
+**/.venv/
+**/venv/
+
+# Ignore Python cache
+**/__pycache__/
+**/*.pyc
+**/*.pyo
+**/*.pyd
+
+# Ignore local uv metadata
+.uv/
+
+# Ignore local env files
+**/.env

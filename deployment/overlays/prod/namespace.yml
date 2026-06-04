@@ -1,0 +1,5 @@
+# deloyments/ overlays/prod/namespace.yml
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sentiment-prod

@@ -1,0 +1,12 @@
+# base/job/service.yml
+apiVersion: v1
+kind: Service
+metadata:
+  name: job
+spec:
+  type: ClusterIP
+  selector:
+    app: job
+  ports:
+    - port: 8001
+      targetPort: 8001

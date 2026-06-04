@@ -1,0 +1,40 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+pip-log.txt
+pip-delete-this-directory.txt
+.history/
+
+# --- Terraform ---
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+
+# --- ML / Large Datasets ---
+model-training/datasets/raw/*
+# Un-ignore the keep file if you want to commit the folder structure
+!model-training/datasets/raw/.gitkeep
+*.zip
+*.tar.gz
+*.pkl
+
+# --- Local Databases & Runtime Artifacts ---
+*.db
+*.rdb
+job-service/application/jobs.db
+job-service/application/dump.rdb
+
+# --- OS Specific ---
+.DS_Store
+Thumbs.db

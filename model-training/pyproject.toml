@@ -1,0 +1,25 @@
+[project]
+name = "sentiment-analyzer"
+version = "0.1.0"
+description = "A modular sentiment analysis pipeline using the Sentiment140 dataset."
+authors = [
+    { name = "Gurushik L J", email = "gurushikjayakumar@gmail.com" }
+]
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "MIT" }
+
+# System-wide Core Dependencies
+dependencies = [
+    "pandas>=3.0.3",
+    "pyyaml>=6.0.3",
+    "scikit-learn>=1.8.0",
+]
+
+# Option A: Poetry Script Shortcuts
+# These create executable entrypoints tied to Python functions
+[tool.poetry.scripts]
+preprocess = "scripts.preprocess:preprocess_data"
+train = "scripts.train:train_model"
+evaluate = "scripts.evaluate:evaluate_model"
+analyze = "main:main"
